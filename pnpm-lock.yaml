@@ -41,7 +41,7 @@ importers:
 
   packages/api:
     dependencies:
-      '@ajc/shared':
+      '@keyscore/shared':
         specifier: workspace:*
         version: link:../shared
       bcryptjs:
@@ -178,12 +178,12 @@ importers:
 
   packages/web:
     dependencies:
-      '@ajc/shared':
-        specifier: workspace:*
-        version: link:../shared
       '@hookform/resolvers':
         specifier: ^3.6.0
         version: 3.10.0(react-hook-form@7.83.0(react@18.3.1))
+      '@keyscore/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@radix-ui/react-accordion':
         specifier: ^1.2.0
         version: 1.2.20(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
