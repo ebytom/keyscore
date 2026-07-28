@@ -32,7 +32,7 @@
     "db:up": "docker-compose up -d mongodb redis qdrant",
     "db:down": "docker-compose down",
     "db:logs": "docker-compose logs -f",
-    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production') require('husky')()\""
+    "prepare": "husky || true"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
