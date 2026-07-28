@@ -90,7 +90,7 @@ const howItWorks = [
 
 const testimonials = [
   {
-    name: 'Keertana Sen',
+    name: 'Keerthana Sen',
     role: 'Software Engineer',
     image: 'https://media.licdn.com/dms/image/v2/D5603AQEbfxTBCbxiDw/profile-displayphoto-scale_400_400/B56ZewjcDWG0Ak-/0/1751013772614?e=1786579200&v=beta&t=G9GYkS23TY0RZxwGwBrnzVi2_G0TZLzAErzw2C82lA4',
     content: 'Finally, a simple tool that does one thing well. I can instantly see what keywords I\'m missing before applying.',
