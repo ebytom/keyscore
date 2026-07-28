@@ -16,8 +16,7 @@ import { useResumes } from '@/services/resumes';
 
 export default function DashboardPage() {
   const { user } = useAuthStore();
-  const { data: resumesData } = useResumes();
-  const resumes = resumesData?.data || [];
+  const { data: resumes = [] } = useResumes();
 
   return (
     <div className="space-y-6">

@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, handleApiError } from '@/lib/api';
-import type { CreateJobInput } from '@ajc/shared';
+import type { CreateJobInput } from '@keyscore/shared';
 
 export interface Job {
   _id: string;

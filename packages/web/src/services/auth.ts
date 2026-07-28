@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, handleApiError } from '@/lib/api';
 import { useAuthStore } from '@/stores/authStore';
-import type { LoginInput, RegisterInput } from '@ajc/shared';
+import type { LoginInput, RegisterInput } from '@keyscore/shared';
 
 interface User {
   id: string;
