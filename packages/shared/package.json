@@ -1,0 +1,31 @@
+{
+  "name": "@keyscore/shared",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared types, constants, and utilities for KeyScore",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}

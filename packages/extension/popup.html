@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeyScore</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 400px;
+      min-height: 500px;
+      max-height: 600px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #0f0f23;
+      color: #e2e8f0;
+      overflow-y: auto;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1e293b;
+      margin-bottom: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      width: 16px;
+      height: 16px;
+      color: white;
+    }
+
+    .logo-text {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+    }
+
+    .btn-outline:hover {
+      background: #1e293b;
+    }
+
+    .btn-sm {
+      padding: 4px 8px;
+      font-size: 11px;
+    }
+
+    .btn-icon {
+      padding: 6px;
+      border-radius: 6px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+
+    .btn-icon:hover {
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+
+    /* Auth Section */
+    .auth-section {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .auth-section h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .auth-section p {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* JD Section */
+    .jd-section {
+      margin-bottom: 16px;
+    }
+
+    .jd-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .jd-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .jd-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #22c55e;
+    }
+
+    .jd-status.error {
+      color: #ef4444;
+    }
+
+    .jd-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .jd-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Resume List */
+    .resumes-section {
+      margin-bottom: 16px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .resume-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .resume-card {
+      background: #1e293b;
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .resume-card:hover {
+      background: #243244;
+    }
+
+    .resume-card.selected {
+      border-color: #6366f1;
+    }
+
+    .resume-card.best-match {
+      border-color: #22c55e;
+    }
+
+    .resume-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .resume-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .resume-icon {
+      width: 36px;
+      height: 36px;
+      background: #334155;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .resume-icon svg {
+      width: 18px;
+      height: 18px;
+      color: #6366f1;
+    }
+
+    .resume-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .resume-meta {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .resume-score {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .score-value {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .score-value.high { color: #22c55e; }
+    .score-value.medium { color: #eab308; }
+    .score-value.low { color: #ef4444; }
+
+    .score-label {
+      font-size: 10px;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .best-match-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* Keywords Section */
+    .keywords-preview {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #334155;
+    }
+
+    .keywords-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .keywords-label {
+      font-size: 10px;
+      color: #64748b;
+      width: 60px;
+      flex-shrink: 0;
+    }
+
+    .keywords-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .keyword-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .keyword-tag.matched {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+    }
+
+    .keyword-tag.missing {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+    }
+
+    .keyword-tag svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    /* Detail View */
+    .detail-view {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #0f0f23;
+      z-index: 100;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .detail-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .back-btn {
+      padding: 6px;
+      background: #1e293b;
+      border: none;
+      border-radius: 6px;
+      color: #e2e8f0;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: #334155;
+    }
+
+    .detail-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* Score Card */
+    .detail-score-card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .score-main {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .detail-score-value {
+      font-size: 42px;
+      font-weight: 700;
+    }
+
+    .detail-score-label {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .score-breakdown {
+      padding-top: 12px;
+      border-top: 1px solid #334155;
+    }
+
+    .score-bar-container {
+      width: 100%;
+    }
+
+    .score-bar-bg {
+      height: 8px;
+      background: #334155;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .score-bar-fill.medium {
+      background: linear-gradient(90deg, #eab308, #facc15);
+    }
+
+    .score-bar-fill.low {
+      background: linear-gradient(90deg, #ef4444, #f87171);
+    }
+
+    .score-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    /* Improvement Tip */
+    .improvement-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .tip-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .tip-content {
+      flex: 1;
+    }
+
+    .tip-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a5b4fc;
+      margin-bottom: 2px;
+    }
+
+    .tip-text {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    .detail-section {
+      margin-bottom: 16px;
+    }
+
+    .detail-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .detail-section-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .count-badge {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .count-badge.matched {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .count-badge.missing {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+
+    .count-badge.neutral {
+      background: rgba(148, 163, 184, 0.2);
+      color: #94a3b8;
+    }
+
+    .section-hint {
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+
+    .copy-btn {
+      padding: 4px 8px !important;
+      font-size: 10px !important;
+    }
+
+    .copy-btn.copied {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+
+    .keywords-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .keyword-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #1e293b;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .keyword-item.matched {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .keyword-item.missing {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .keyword-item.neutral {
+      background: rgba(148, 163, 184, 0.1);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .keyword-icon {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .keyword-icon.matched {
+      color: #22c55e;
+    }
+
+    .keyword-icon.missing {
+      color: #ef4444;
+    }
+
+    .keyword-icon svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .keyword-text {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .keyword-text.matched {
+      color: #22c55e;
+    }
+
+    .keyword-text.missing {
+      color: #ef4444;
+    }
+
+    .keyword-text.neutral {
+      color: #94a3b8;
+    }
+
+    /* Loading */
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #334155;
+      border-top-color: #6366f1;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .empty-state-icon {
+      width: 48px;
+      height: 48px;
+      background: #1e293b;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .empty-state-icon svg {
+      width: 24px;
+      height: 24px;
+      color: #64748b;
+    }
+
+    .empty-state h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .empty-state p {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+
+    /* Footer */
+    .footer {
+      padding-top: 12px;
+      border-top: 1px solid #1e293b;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .footer a {
+      color: #6366f1;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Status Messages */
+    .status {
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .status.info {
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+
+    .status.success {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+    }
+
+    .status.error {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    /* Hidden */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Remove underline from button links */
+    a.btn {
+      text-decoration: none !important;
+    }
+
+    /* View More JD */
+    .jd-view-more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      width: 100%;
+      margin-top: 8px;
+      padding: 6px 0;
+      font-size: 11px;
+      color: #6366f1;
+      cursor: pointer;
+      background: none;
+      border: none;
+      border-top: 1px solid #334155;
+    }
+
+    .jd-view-more:hover {
+      color: #818cf8;
+    }
+
+    .jd-view-more svg {
+      transition: transform 0.2s ease;
+    }
+
+    .jd-view-more.expanded svg {
+      transform: rotate(180deg);
+    }
+
+    .jd-preview {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    .jd-preview-text {
+      color: #94a3b8;
+      line-height: 1.5;
+      max-height: 60px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .jd-preview-text.expanded {
+      max-height: none;
+    }
+
+    .jd-preview-text:not(.expanded)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: linear-gradient(transparent, #1e293b);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="logo-text">KeyScore</span>
+      </div>
+      <div class="header-actions">
+        <div id="userAvatar" class="user-avatar hidden"></div>
+        <button id="logoutBtn" class="btn-icon hidden" title="Logout">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Loading...</div>
+    </div>
+
+    <!-- Auth Section -->
+    <div id="authSection" class="auth-section hidden">
+      <h2>Welcome to KeyScore</h2>
+      <p>Sign in to check your resume's ATS score against any job description.</p>
+      <button id="loginBtn" class="btn btn-primary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+        </svg>
+        Sign In to Continue
+      </button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="hidden">
+      <!-- Status Message -->
+      <div id="statusMessage" class="status hidden"></div>
+
+      <!-- JD Section -->
+      <div class="jd-section">
+        <div class="jd-header">
+          <span class="jd-title">Job Description</span>
+          <div id="jdStatus" class="jd-status hidden">
+            <span class="jd-status-dot"></span>
+            <span id="jdStatusText">Detected</span>
+          </div>
+        </div>
+        <div id="jdPreviewContainer" class="jd-preview">
+          <div id="jdPreview" class="jd-preview-text">
+            Click "Extract JD" to analyze the job description on this page.
+          </div>
+          <button id="viewMoreJdBtn" class="jd-view-more hidden">
+            <span>View more</span>
+            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+        </div>
+        <div class="jd-actions">
+          <button id="extractJdBtn" class="btn btn-primary btn-sm">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+            </svg>
+            Extract JD
+          </button>
+          <button id="analyzeBtn" class="btn btn-outline btn-sm hidden">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Analyze All Resumes
+          </button>
+        </div>
+      </div>
+
+      <!-- Resumes Section -->
+      <div id="resumesSection" class="resumes-section">
+        <div class="section-header">
+          <span class="section-title">Your Resumes</span>
+          <a href="http://localhost:3000/resumes" target="_blank" class="btn btn-outline btn-sm">
+            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            Add
+          </a>
+        </div>
+        <div id="resumeList" class="resume-list">
+          <!-- Resumes will be rendered here -->
+        </div>
+      </div>
+
+      <!-- No Resumes State -->
+      <div id="noResumes" class="empty-state hidden">
+        <div class="empty-state-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+        </div>
+        <h3>No Resumes Yet</h3>
+        <p>Upload your resumes to start comparing them against job descriptions.</p>
+        <a href="http://localhost:3000/resumes" target="_blank" class="btn btn-primary">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+          </svg>
+          Upload Resumes
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <a href="http://localhost:3000/dashboard" target="_blank">Open Dashboard →</a>
+    </div>
+  </div>
+
+  <!-- Detail View (shown when clicking a resume) -->
+  <div id="detailView" class="detail-view hidden">
+    <div class="detail-header">
+      <button id="backBtn" class="back-btn">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <span id="detailTitle" class="detail-title">Resume Details</span>
+    </div>
+
+    <!-- Score Card with Breakdown -->
+    <div class="detail-score-card">
+      <div class="score-main">
+        <div id="detailScoreValue" class="detail-score-value high">85%</div>
+        <div class="detail-score-label">ATS Match Score</div>
+      </div>
+      <div class="score-breakdown">
+        <div class="score-bar-container">
+          <div class="score-bar-bg">
+            <div id="scoreBarFill" class="score-bar-fill" style="width: 85%"></div>
+          </div>
+          <div class="score-bar-labels">
+            <span id="matchedLabel">9 matched</span>
+            <span id="totalLabel">of 12 keywords</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Improvement Tip -->
+    <div id="improvementTip" class="improvement-tip">
+      <div class="tip-icon">💡</div>
+      <div class="tip-content">
+        <div class="tip-title">Quick Tip</div>
+        <div id="tipText" class="tip-text">Add 3 missing keywords to potentially boost your score to ~95%</div>
+      </div>
+    </div>
+
+    <!-- Missing Keywords Section (show first - more important) -->
+    <div class="detail-section">
+      <div class="detail-section-header">
+        <div class="detail-section-title">
+          <span>❌ Missing from Resume</span>
+          <span id="missingCount" class="count-badge missing">(0)</span>
+        </div>
+        <button id="copyMissingBtn" class="btn btn-sm btn-outline copy-btn" title="Copy to clipboard">
+          <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          Copy
+        </button>
+      </div>
+      <p class="section-hint">Add these keywords to your resume to improve your match</p>
+      <div id="missingKeywords" class="keywords-list">
+        <!-- Missing keywords will be rendered here -->
+      </div>
+    </div>
+
+    <!-- Matched Keywords Section -->
+    <div class="detail-section">
+      <div class="detail-section-header">
+        <div class="detail-section-title">
+          <span>✅ Already in Resume</span>
+          <span id="matchedCount" class="count-badge matched">(0)</span>
+        </div>
+      </div>
+      <div id="matchedKeywords" class="keywords-list">
+        <!-- Matched keywords will be rendered here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

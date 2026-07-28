@@ -1,0 +1,14 @@
+{
+  "name": "@keyscore/extension",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "KeyScore Chrome Extension - ATS Resume Checker",
+  "scripts": {
+    "build": "node scripts/build-zip.js",
+    "generate-icons": "node scripts/generate-icons.js"
+  },
+  "devDependencies": {
+    "archiver": "^7.0.1"
+  }
+}
