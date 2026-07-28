@@ -9,6 +9,7 @@
     "generate-icons": "node scripts/generate-icons.js"
   },
   "devDependencies": {
-    "archiver": "^7.0.1"
+    "archiver": "^7.0.1",
+    "dotenv": "^16.4.5"
   }
 }
