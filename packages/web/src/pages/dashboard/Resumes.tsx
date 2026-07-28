@@ -360,26 +360,6 @@ export default function ResumesPage() {
             </Card>
           </motion.div>
         ))}
-
-        {/* Add New Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: filteredResumes.length * 0.1 }}
-        >
-          <Card
-            className="border-dashed hover:border-primary/50 hover:bg-accent/50 transition-colors cursor-pointer h-full min-h-[180px] flex items-center justify-center"
-            onClick={() => fileInputRef.current?.click()}
-          >
-            <div className="text-center p-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted mx-auto mb-3">
-                <Plus className="h-6 w-6 text-muted-foreground" />
-              </div>
-              <p className="font-medium">Add New Resume</p>
-              <p className="text-sm text-muted-foreground mt-1">Upload or create a new resume</p>
-            </div>
-          </Card>
-        </motion.div>
       </div>
 
       {/* Empty State */}
