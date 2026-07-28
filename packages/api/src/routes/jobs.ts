@@ -3,7 +3,7 @@ import { Job } from '../models/Job.js';
 import { authenticate, AuthRequest } from '../middleware/auth.js';
 import { validateBody } from '../middleware/validate.js';
 import { AppError } from '../middleware/error.js';
-import { createJobSchema } from '@ajc/shared';
+import { createJobSchema } from '@keyscore/shared';
 
 const router = Router();
 

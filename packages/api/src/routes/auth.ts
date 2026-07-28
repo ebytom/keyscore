@@ -9,7 +9,7 @@ import { User, IUser } from '../models/User.js';
 import { validateBody } from '../middleware/validate.js';
 import { authenticate, AuthRequest, JWTPayload } from '../middleware/auth.js';
 import { AppError } from '../middleware/error.js';
-import { registerSchema, loginSchema } from '@ajc/shared';
+import { registerSchema, loginSchema } from '@keyscore/shared';
 
 const router = Router();
 

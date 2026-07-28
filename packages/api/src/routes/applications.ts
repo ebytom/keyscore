@@ -4,7 +4,7 @@ import { Job } from '../models/Job.js';
 import { authenticate, AuthRequest } from '../middleware/auth.js';
 import { validateBody } from '../middleware/validate.js';
 import { AppError } from '../middleware/error.js';
-import { createApplicationSchema } from '@ajc/shared';
+import { createApplicationSchema } from '@keyscore/shared';
 
 const router = Router();
 
