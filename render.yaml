@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: keyscore-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: packages/api
+    buildCommand: pnpm install && pnpm run build
+    startCommand: node dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false

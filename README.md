@@ -1,133 +1,106 @@
-# AI Job Search Copilot
+# KeyScore
 
 <div align="center">
 
-![AI Job Search Copilot](https://img.shields.io/badge/AI-Job%20Search%20Copilot-blue?style=for-the-badge&logo=openai)
-![Version](https://img.shields.io/badge/version-1.0.0-green?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-orange?style=for-the-badge)
+![KeyScore](https://img.shields.io/badge/KeyScore-ATS%20Resume%20Checker-6366f1?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-1.0.0-22c55e?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-f97316?style=for-the-badge)
 
-**An intelligent AI-powered career assistant that automates every stage of the job search journey**
+**Free ATS Resume Checker — Instantly check how your resume scores against any job posting**
 
-[Demo](https://ai-job-copilot.vercel.app) • [Documentation](./docs) • [Contributing](./CONTRIBUTING.md)
+[Live Demo](https://keyscore.vercel.app) • [Install Extension](#-chrome-extension) • [Deploy Your Own](#-deployment)
 
 </div>
 
 ---
 
-## 🚀 Overview
+## ✨ What is KeyScore?
 
-AI Job Search Copilot is a production-ready SaaS platform that transforms the job search experience through AI automation. Unlike traditional job boards or simple resume builders, this platform acts as a true AI co-pilot—providing personalized guidance, automated analysis, and intelligent recommendations throughout your entire job search lifecycle.
+KeyScore is a **free, open-source ATS (Applicant Tracking System) resume checker** that helps job seekers optimize their resumes for specific job postings. Unlike expensive paid tools, KeyScore gives you instant, actionable feedback without any cost.
 
-### Key Features
+### 🎯 Key Features
 
-- **🔍 Chrome Extension** - One-click job analysis from LinkedIn, Indeed, and more
-- **📄 Resume Intelligence** - AI-powered parsing, optimization, and ATS scoring
-- **✉️ Cover Letter Generation** - Personalized, role-specific cover letters
-- **🎯 ATS Match Scoring** - Real-time compatibility analysis with actionable insights
-- **🎤 Mock Interviews** - AI-powered practice sessions (HR, Technical, System Design)
-- **📊 Job Tracker** - End-to-end application pipeline management
-- **🎓 Career Coaching** - Personalized guidance and learning roadmaps
-- **🏢 Company Research** - AI-synthesized intelligence on target companies
+- **📊 Instant ATS Score** — Get your resume's compatibility score in seconds
+- **🔑 Keyword Analysis** — See exactly which keywords you're missing
+- **💡 Smart Suggestions** — Actionable tips to improve your score
+- **🧩 Chrome Extension** — Analyze jobs directly from LinkedIn, Indeed & more
+- **🆓 100% Free** — No credit card, no premium tier, no catch
+- **🔒 Privacy First** — Your data stays on your device
+
+---
+
+## 🚀 Quick Start
+
+### Option 1: Use the Web App
+
+Visit [keyscore.vercel.app](https://keyscore.vercel.app) and:
+1. Upload your resume (PDF or DOCX)
+2. Paste the job description
+3. Get your ATS score instantly!
+
+### Option 2: Install the Chrome Extension
+
+1. Download the extension from the website
+2. Open `chrome://extensions` in Chrome
+3. Enable "Developer mode"
+4. Click "Load unpacked" and select the extracted folder
+5. Click the KeyScore icon on any job posting to analyze
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                     AI Job Search Copilot (MERN Stack)              │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│   Frontend (React+Vite)    Backend (Express)     AI Layer           │
-│   ┌─────────────────┐     ┌─────────────────┐   ┌─────────────────┐│
-│   │ • React 18      │     │ • Node.js       │   │ • OpenAI GPT-4  ││
-│   │ • TypeScript    │◄───►│ • TypeScript    │◄─►│ • LangChain     ││
-│   │ • TailwindCSS   │     │ • MongoDB       │   │ • LangGraph     ││
-│   │ • Shadcn/UI     │     │ • Redis         │   │ • Qdrant        ││
-│   │ • Zustand       │     │ • JWT Auth      │   │ • RAG Pipeline  ││
-│   └─────────────────┘     └─────────────────┘   └─────────────────┘│
-│           │                        │                     │          │
-│           └────────────────────────┼─────────────────────┘          │
-│                                    │                                │
-│   Chrome Extension (Manifest V3)   │                                │
-│   ┌─────────────────┐              │                                │
-│   │ • Job Detection │◄─────────────┘                                │
-│   │ • Quick Analysis│                                               │
-│   │ • One-Click Save│                                               │
-│   └─────────────────┘                                               │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                    KeyScore Platform                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   Web App (React + Vite)       API (Express + Node.js)     │
+│   ┌───────────────────┐       ┌───────────────────┐        │
+│   │ • React 18        │       │ • Express.js      │        │
+│   │ • TypeScript      │◄─────►│ • TypeScript      │        │
+│   │ • TailwindCSS     │       │ • MongoDB         │        │
+│   │ • Shadcn/UI       │       │ • JWT Auth        │        │
+│   │ • Zustand         │       │ • PDF/DOCX Parse  │        │
+│   └───────────────────┘       └───────────────────┘        │
+│                                       │                     │
+│   Chrome Extension (Manifest V3)      │                     │
+│   ┌───────────────────┐               │                     │
+│   │ • Job Detection   │◄──────────────┘                     │
+│   │ • One-Click Score │                                     │
+│   │ • Quick Analysis  │                                     │
+│   └───────────────────┘                                     │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## 📦 Tech Stack
 
-### Frontend (MERN - React)
-- **Build Tool:** Vite
-- **UI Library:** React 18
-- **Language:** TypeScript
-- **Styling:** TailwindCSS + Shadcn/UI
-- **Animation:** Framer Motion
-- **State:** Zustand + TanStack Query
-- **Routing:** React Router DOM
-- **Forms:** React Hook Form + Zod
-
-### Backend (MERN - Express + Node)
-- **Runtime:** Node.js
-- **Framework:** Express.js
-- **Database:** MongoDB (Mongoose)
-- **Cache:** Redis
-- **Auth:** JWT + Passport.js (Google, GitHub OAuth)
-
-### AI Stack
-- **LLM:** OpenAI GPT-4
-- **Framework:** LangChain + LangGraph
-- **Embeddings:** OpenAI Embeddings
-- **Vector DB:** Qdrant
-- **Architecture:** RAG + Multi-Agent
-
-### Infrastructure
-- **Containers:** Docker + Kubernetes
-- **CI/CD:** GitHub Actions
-- **Frontend Hosting:** Vercel
-- **Backend Hosting:** Railway/AWS
-- **Storage:** AWS S3 / Cloudinary
+| Layer | Technologies |
+|-------|-------------|
+| **Frontend** | React 18, TypeScript, Vite, TailwindCSS, Shadcn/UI, Zustand |
+| **Backend** | Node.js, Express, TypeScript, MongoDB, JWT |
+| **Extension** | Chrome Manifest V3, Content Scripts |
+| **Deployment** | Vercel (Web), Render (API), MongoDB Atlas (Database) |
 
 ---
 
-## 📚 Documentation
-
-| Document | Description | Status |
-|----------|-------------|--------|
-| [PRD](./docs/PRD.md) | Product Requirements Document | ✅ Complete |
-| [SRS](./docs/SRS.md) | Software Requirements Specification | ✅ Complete |
-| [User Personas](./docs/USER_PERSONAS.md) | Detailed User Personas | ✅ Complete |
-| [User Stories](./docs/USER_STORIES.md) | User Stories & Product Backlog | ✅ Complete |
-| [HLD](./docs/architecture/HLD.md) | High-Level Design | ⏳ Pending |
-| [LLD](./docs/architecture/LLD.md) | Low-Level Design | ⏳ Pending |
-| [Database Design](./docs/architecture/DATABASE.md) | MongoDB Schema Design | ⏳ Pending |
-| [API Documentation](./docs/api/README.md) | REST API Reference | ⏳ Pending |
-| [Deployment Guide](./docs/guides/DEPLOYMENT.md) | Infrastructure Setup | ⏳ Pending |
-
----
-
-## 🚀 Quick Start
+## 🛠️ Local Development
 
 ### Prerequisites
 
 - Node.js 20+
 - pnpm 9+
-- Docker & Docker Compose
-- MongoDB (or use Docker)
-- Redis (or use Docker)
+- MongoDB (local or Docker)
 
-### Installation
+### Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ai-job-copilot.git
-cd ai-job-copilot
+git clone https://github.com/ebytom/keyscore.git
+cd keyscore
 
 # Install dependencies
 pnpm install
@@ -135,31 +108,30 @@ pnpm install
 # Set up environment variables
 cp .env.example .env.local
 
-# Start development environment
-docker-compose up -d  # MongoDB, Redis, Qdrant
-pnpm dev              # Start all packages
+# Start MongoDB (using Docker)
+docker run -d -p 27018:27017 --name keyscore-mongo mongo:7
+
+# Start development servers
+pnpm dev
 ```
+
+The app will be running at:
+- **Web**: http://localhost:3000
+- **API**: http://localhost:4000
 
 ### Environment Variables
 
+Create a `.env.local` file in the root:
+
 ```env
-# Authentication
-CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
+# MongoDB
+MONGODB_URI=mongodb://localhost:27018/keyscore
 
-# Database
-MONGODB_URI=mongodb://localhost:27017/ai-job-copilot
-REDIS_URL=redis://localhost:6379
+# JWT (generate a secure secret)
+JWT_SECRET=your-secret-key-here
 
-# AI
-OPENAI_API_KEY=
-QDRANT_URL=http://localhost:6333
-QDRANT_API_KEY=
-
-# Storage
-AWS_S3_BUCKET=
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
+# Client URL
+CLIENT_URL=http://localhost:3000
 ```
 
 ---
@@ -167,93 +139,130 @@ AWS_SECRET_ACCESS_KEY=
 ## 📁 Project Structure
 
 ```
-ai-job-copilot/
+keyscore/
 ├── packages/
-│   ├── web/                 # Next.js frontend
-│   │   ├── app/            # App Router pages
-│   │   ├── components/     # React components
-│   │   ├── lib/            # Utilities
-│   │   └── styles/         # Global styles
+│   ├── web/                 # React frontend (Vite)
+│   │   ├── src/
+│   │   │   ├── components/  # UI components
+│   │   │   ├── pages/       # Route pages
+│   │   │   ├── stores/      # Zustand stores
+│   │   │   └── lib/         # Utilities
+│   │   └── public/
 │   │
 │   ├── api/                 # Express backend
-│   │   ├── src/
-│   │   │   ├── controllers/
-│   │   │   ├── services/
-│   │   │   ├── models/
-│   │   │   ├── routes/
-│   │   │   ├── middleware/
-│   │   │   └── utils/
-│   │   └── tests/
+│   │   └── src/
+│   │       ├── routes/      # API routes
+│   │       ├── services/    # Business logic
+│   │       ├── models/      # MongoDB models
+│   │       └── middleware/  # Auth, error handling
 │   │
 │   ├── extension/           # Chrome Extension
-│   │   ├── src/
-│   │   ├── public/
-│   │   └── manifest.json
+│   │   ├── popup.html       # Extension popup
+│   │   ├── manifest.json    # Manifest V3
+│   │   └── content-scripts/ # Page injection
 │   │
-│   ├── ai-agents/           # LangGraph agents
-│   │   ├── src/
-│   │   │   ├── agents/
-│   │   │   ├── tools/
-│   │   │   ├── chains/
-│   │   │   └── graphs/
-│   │   └── tests/
-│   │
-│   └── shared/              # Shared utilities
-│       ├── types/
-│       ├── constants/
-│       └── utils/
+│   └── shared/              # Shared types & utils
 │
-├── infrastructure/
-│   ├── docker/
-│   ├── k8s/
-│   └── terraform/
-│
-├── docs/
-│   ├── PRD.md
-│   ├── SRS.md
-│   ├── architecture/
-│   ├── api/
-│   └── guides/
-│
-└── scripts/
+└── docs/                    # Documentation
 ```
 
 ---
 
-## 🎯 Development Phases
+## 🌐 Deployment
 
-### Phase 1: MVP (Current)
-- [x] Product Requirements Document
-- [ ] Software Requirements Specification
-- [ ] System Architecture Design
-- [ ] Database Schema Design
-- [ ] UI/UX Design System
-- [ ] Authentication System
-- [ ] Resume Intelligence
-- [ ] Chrome Extension
-- [ ] ATS Scoring
-- [ ] Cover Letter Generation
-- [ ] Job Tracker
+### Deploy to Vercel + Render + MongoDB Atlas (100% Free)
 
-### Phase 2: Enhancement
-- [ ] Mock Interview System
-- [ ] Skill Gap Analysis
-- [ ] Learning Roadmaps
-- [ ] Company Research
-- [ ] Advanced Dashboard
-- [ ] Mobile PWA
+#### 1. Set Up MongoDB Atlas (Free Database)
 
-### Phase 3: Scale
-- [ ] Career Coaching AI
-- [ ] Team Features
-- [ ] API Access
-- [ ] Enterprise Features
+1. Go to [mongodb.com/atlas](https://www.mongodb.com/atlas) and create an account
+2. Create a **free M0 cluster** (512MB storage)
+3. Click **"Connect"** → **"Drivers"** → Copy the connection string
+4. Replace `<password>` with your database password
+5. Add `/keyscore` before `?` in the URI (e.g., `...mongodb.net/keyscore?retryWrites...`)
+
+#### 2. Deploy API to Render (Free Backend)
+
+1. Go to [render.com](https://render.com) and sign in with GitHub
+2. Click **"New +"** → **"Web Service"**
+3. Connect your `keyscore` repository
+4. Configure:
+   - **Name**: `keyscore-api`
+   - **Region**: Oregon (US West)
+   - **Root Directory**: `packages/api`
+   - **Runtime**: Node
+   - **Build Command**: `pnpm install && pnpm run build`
+   - **Start Command**: `node dist/index.js`
+   - **Instance Type**: Free
+
+5. Add **Environment Variables**:
+   | Key | Value |
+   |-----|-------|
+   | `NODE_ENV` | `production` |
+   | `PORT` | `4000` |
+   | `MONGODB_URI` | Your MongoDB Atlas connection string |
+   | `JWT_SECRET` | Generate with `openssl rand -base64 32` |
+   | `CLIENT_URL` | `https://keyscore.vercel.app` (update after Vercel deploy) |
+
+6. Click **"Create Web Service"** and copy your URL (e.g., `https://keyscore-api.onrender.com`)
+
+> ⚠️ **Note**: Free Render services sleep after 15 minutes of inactivity. First request after sleep takes ~30 seconds.
+
+#### 3. Deploy Web to Vercel (Free Frontend)
+
+1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
+2. Click **"Add New Project"** → Import your `keyscore` repo
+3. Configure:
+   - **Framework Preset**: Vite
+   - **Root Directory**: `packages/web`
+   - **Build Command**: `pnpm run build`
+   - **Output Directory**: `dist`
+
+4. Add **Environment Variable**:
+   - `VITE_API_URL` = `https://keyscore-api.onrender.com` (your Render URL, without `/api`)
+
+5. Click **"Deploy"**
+
+#### 4. Update CORS (Final Step)
+
+Go back to Render dashboard and update:
+- `CLIENT_URL` = your Vercel URL (e.g., `https://keyscore.vercel.app`)
+
+Trigger a redeploy.
+
+---
+
+### Your Deployment URLs
+
+| Service | URL |
+|---------|-----|
+| **Frontend** | `https://keyscore.vercel.app` |
+| **API** | `https://keyscore-api.onrender.com` |
+| **Extension** | `https://keyscore.vercel.app/extension/keyscore-extension.zip` |
+
+---
+
+## 🧩 Chrome Extension
+
+### Build the Extension
+
+```bash
+pnpm --filter @keyscore/extension build
+```
+
+The built extension will be at `packages/extension/keyscore-extension.zip`.
+
+### Load in Chrome
+
+1. Go to `chrome://extensions`
+2. Enable "Developer mode"
+3. Click "Load unpacked"
+4. Select the `packages/extension` folder
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -269,19 +278,10 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ---
 
-## 🙏 Acknowledgments
-
-- OpenAI for GPT-4 and embeddings
-- LangChain team for the amazing framework
-- Shadcn for the beautiful UI components
-- The open-source community
-
----
-
 <div align="center">
 
-**Built with ❤️ for job seekers everywhere**
+**Built with ❤️ to help job seekers land more interviews**
 
-[⬆ Back to top](#ai-job-search-copilot)
+[⬆ Back to top](#keyscore)
 
 </div>
