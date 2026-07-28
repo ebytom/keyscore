@@ -4,9 +4,8 @@ services:
     runtime: node
     region: oregon
     plan: free
-    rootDir: packages/api
-    buildCommand: pnpm install && pnpm run build
-    startCommand: node dist/index.js
+    buildCommand: pnpm install && pnpm --filter @keyscore/shared run build && pnpm --filter @keyscore/api run build
+    startCommand: node packages/api/dist/index.js
     envVars:
       - key: NODE_ENV
         value: production
